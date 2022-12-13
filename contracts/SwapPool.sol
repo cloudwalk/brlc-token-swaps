@@ -191,7 +191,7 @@ contract SwapPool is
         address tokenOut,
         uint256 amountIn,
         uint256 amountOut,
-        address signer,
+        address sender,
         address receiver
     ) internal returns (uint256) {
         if (!_supportedIn[tokenIn] || !_supportedOut[tokenOut]) {
@@ -204,23 +204,24 @@ contract SwapPool is
                 tokenOut: tokenOut,
                 amountIn: amountIn,
                 amountOut: amountOut,
-                sender: signer,
+                sender: sender,
                 receiver: receiver,
                 status: SwapStatus.Pending
             })
         );
 
-        Swap memory selectedSwap = _swaps[id];
-
         //receive tokens that the contract bought
-        IERC20Upgradeable(selectedSwap.tokenIn).safeTransferFrom(
-            selectedSwap.sender,
+        IERC20Upgradeable(tokenIn).safeTransferFrom(
+            sender,
             address(this),
-            selectedSwap.amountIn
+            amountIn
         );
-        emit SwapCreated(id);
-        id++;
-        return id - 1;
+
+        uint256 currentId = id;
+        emit SwapCreated(currentId);
+
+        id = currentId + 1;
+        return currentId;
     }
 
     function _finalizeSwap(uint256 id) internal {
