@@ -88,7 +88,7 @@ contract SwapPool is
         address receiver,
         bytes calldata sig
     ) external onlyRole(MANAGER_ROLE) notBlacklisted(signer) notBlacklisted(receiver) whenNotPaused {
-        _verifySignature(tokenIn, tokenOut, amountIn, amountOut, signer, receiver, sig, id);
+        _verifySignature(tokenIn, tokenOut, amountIn, amountOut, signer, receiver, sig, _swaps.length);
         _createSwap(tokenIn, tokenOut, amountIn, amountOut, signer, receiver);
     }
 
@@ -101,7 +101,7 @@ contract SwapPool is
         address receiver,
         bytes calldata sig
     ) external onlyRole(MANAGER_ROLE) notBlacklisted(signer) notBlacklisted(receiver) whenNotPaused {
-        _verifySignature(tokenIn, tokenOut, amountIn, amountOut, signer, receiver, sig, id);
+        _verifySignature(tokenIn, tokenOut, amountIn, amountOut, signer, receiver, sig, _swaps.length);
         uint256 newSwapId = _createSwap(tokenIn, tokenOut, amountIn, amountOut, signer, receiver);
         _finalizeSwap(newSwapId);
     }
@@ -198,6 +198,7 @@ contract SwapPool is
             revert TokenNotSupported();
         }
 
+        uint256 newId = _swaps.length;
         _swaps.push(
             Swap({
                 tokenIn: tokenIn,
@@ -217,11 +218,9 @@ contract SwapPool is
             amountIn
         );
 
-        uint256 currentId = id;
-        emit SwapCreated(currentId);
+        emit SwapCreated(newId);
 
-        id = currentId + 1;
-        return currentId;
+        return newId;
     }
 
     function _finalizeSwap(uint256 id) internal {
