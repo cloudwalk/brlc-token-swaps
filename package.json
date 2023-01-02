@@ -17,5 +17,8 @@
   "scripts": {
     "test": "npx hardhat test",
     "prettier": "prettier --write 'contracts/**/*.sol'"
+  },
+  "dependencies": {
+    "@cloudwalk-inc/brlc-contracts": "^1.0.0"
   }
 }

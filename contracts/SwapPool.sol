@@ -7,10 +7,10 @@ import { IERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC
 import { SafeERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 
 import { SignatureChecker } from "./base/SignatureChecker.sol";
-import { BlacklistControlUpgradeable } from "./base/BlacklistControlUpgradeable.sol";
-import { PauseControlUpgradeable } from "./base/PauseControlUpgradeable.sol";
-import { RescueControlUpgradeable } from "./base/RescueControlUpgradeable.sol";
-import { StoragePlaceholder200 } from "./base/StoragePlaceholder.sol";
+import { BlacklistControlUpgradeable } from "@cloudwalk-inc/brlc-contracts/contracts/base/BlacklistControlUpgradeable.sol";
+import { PauseControlUpgradeable } from "@cloudwalk-inc/brlc-contracts/contracts/base/PauseControlUpgradeable.sol";
+import { RescueControlUpgradeable } from "@cloudwalk-inc/brlc-contracts/contracts/base/RescueControlUpgradeable.sol";
+import { StoragePlaceholder200 } from "@cloudwalk-inc/brlc-contracts/contracts/base/StoragePlaceholder.sol";
 import { SwapPoolStorage } from "./SwapPoolStorage.sol";
 import { ISwapPool } from "./ISwapPool.sol";
 

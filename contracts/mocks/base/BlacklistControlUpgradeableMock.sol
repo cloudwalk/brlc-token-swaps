@@ -2,7 +2,7 @@
 
 pragma solidity 0.8.16;
 
-import { BlacklistControlUpgradeable } from "../../base/BlacklistControlUpgradeable.sol";
+import { BlacklistControlUpgradeable } from "@cloudwalk-inc/brlc-contracts/contracts/base/BlacklistControlUpgradeable.sol";
 
 /**
  * @title BlacklistControlUpgradeableMock contract
